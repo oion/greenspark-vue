@@ -8,10 +8,10 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "lint": "yarn lint:eslint && yarn lint:prettier",
+    "lint": "pnpm lint:eslint && pnpm lint:prettier",
     "lint:eslint": "eslint .",
     "lint:prettier": "prettier . --check",
-    "lintfix": "eslint . --fix && prettier --write --list-different ."
+    "lintfix": "eslint . --fix && prettier  --plugin=prettier-plugin-tailwindcss --write --list-different ."
   },
   "dependencies": {
     "@nuxt/fonts": "0.10.3",
@@ -27,6 +27,7 @@
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.2",
     "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.10",
     "typescript": "^5.7.3"
   }
 }
