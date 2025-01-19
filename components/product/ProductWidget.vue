@@ -5,27 +5,27 @@ import { Color } from "~/types/product.js";
 interface iProps {
   action: string;
   amount: number;
-  type: string;
   color: Color;
-  profileLink?: string;
   isLinked: boolean;
+  profileLink?: string;
+  type: string;
 }
 
 const props = withDefaults(defineProps<iProps>(), {
   action: "",
   amount: 0,
-  type: "",
   color: Color.BLACK,
-  profileLink: "",
   isLinked: false,
+  profileLink: "",
+  type: "",
 });
 
 const COLOR_CLASSES = {
-  [Color.BLACK]: "bg-black text-white",
-  [Color.WHITE]: "bg-white text-green",
   [Color.BEIGE]: "bg-beige text-green",
-  [Color.GREEN]: "bg-green text-white",
+  [Color.BLACK]: "bg-black text-white",
   [Color.BLUE]: "bg-blue text-white",
+  [Color.GREEN]: "bg-green text-white",
+  [Color.WHITE]: "bg-white text-green",
 } as const;
 
 const classes = computed(() => [
@@ -39,7 +39,7 @@ const classes = computed(() => [
 const attributes = computed(() =>
   props.isLinked && !!props.profileLink
     ? { href: `${props.profileLink}`, target: "_blank" }
-    : {},
+    : {}
 );
 </script>
 
