@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Color } from "~/types/product.js";
 
-const widgets = [
+const initialWigets = [
   {
     id: 1,
     type: "carbon",
@@ -85,26 +85,35 @@ const widgets = [
     selectedColor: "beige",
   },
 ];
+
+const widgets = ref({ ...initialWigets });
 </script>
 
 <template>
-  <div class="flex h-screen items-center justify-center p-8">
-    <div class="w-full max-w-4xl rounded-lg p-9 shadow-lg">
+  <div class="flex items-center justify-center p-8">
+    <div class="w-full max-w-4xl rounded-lg p-9 shadow-lg bg-neutral-100">
       <h1 class="mb-6 border-b py-4 text-4xl font-bold text-black">
         Per Product Widgets
       </h1>
 
       <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-        <ProductWidget
+        <div
           v-for="widget in widgets"
           :key="widget.id"
-          :action="widget.action"
-          :amount="widget.amount"
-          :type="widget.type"
-          :color="widget.selectedColor as Color"
-          :profile-link="widget.profileLink"
-          :is-linked="widget.linked"
-        />
+          class="flex flex-col gap-4"
+        >
+          <ProductWidget
+            :action="widget.action"
+            :amount="widget.amount"
+            :type="widget.type"
+            :color="widget.selectedColor as Color"
+            :profile-link="widget.profileLink"
+            :is-linked="widget.linked"
+          />
+          <ProductWidgetSettings
+            @change-color="(color) => (widget.selectedColor = color)"
+          />
+        </div>
       </div>
     </div>
   </div>
