@@ -28,7 +28,7 @@ const COLOR_CLASSES = {
   [Color.WHITE]: "bg-white text-green",
 } as const;
 
-const classes = computed(() => [
+const classes = computed<(string | { [key: string]: boolean })[]>(() => [
   COLOR_CLASSES[props.color],
   {
     "hover:shadow-lg hover:pointer hover:-translate-y-1 transition duration-300":
@@ -36,16 +36,18 @@ const classes = computed(() => [
   },
 ]);
 
-const attributes = computed(() =>
-  props.isLinked && !!props.profileLink
-    ? { href: `${props.profileLink}`, target: "_blank" }
-    : {}
+const isLink = computed<boolean>(() => props.isLinked && !!props.profileLink);
+
+const attributes = computed<object>(() =>
+  isLink.value ? { href: `${props.profileLink}`, target: "_blank" } : {}
 );
+
+const tag = computed<string>(() => (isLink.value ? "a" : "div"));
 </script>
 
 <template>
   <component
-    :is="`a`"
+    :is="tag"
     class="flex items-center gap-4 rounded-md p-4"
     :class="classes"
     v-bind="attributes"

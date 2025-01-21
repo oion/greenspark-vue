@@ -111,6 +111,7 @@ const widgets = ref({ ...initialWigets });
             :is-linked="widget.linked"
           />
           <ProductWidgetSettings
+            :is-linked="widget.linked"
             @change-color="(color) => (widget.selectedColor = color)"
           />
         </div>
